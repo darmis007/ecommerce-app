@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+
+{% block content%}
+<head>
+<title>E-Commerce</title>
+</head>
+<body>
+<h3>{{message}}</h3>
+<br>
+<h3 align = right><a href={% url 'home'%}>Home</a></h3>
+<h4 align=right><a href={%url 'myprofile'%}>My Profile</a></h4> 
+
+    <form method="POST">
+        {% csrf_token %}
+        {{addMoneyForm}}
+        <br>
+        <button type="submit" class="btn btn-success float-right">Done</button>
+    </form>
+</body>
+</html>
+{% endblock%}

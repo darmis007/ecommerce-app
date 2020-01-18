@@ -1,0 +1,7 @@
+{% extends 'base.html'%}
+
+{% block content%}
+{% for item in items%}
+<h3><a href={% url 'edit_stock' item.id%}>{{item.item_name}}  {{item.item_quanity}}</a></h3>
+{% endfor%}
+{% endblock%}

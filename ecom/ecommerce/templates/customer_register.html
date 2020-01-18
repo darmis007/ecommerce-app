@@ -1,0 +1,20 @@
+{% extends 'base.html'%}
+
+{% block content%}
+<head>
+<title>E-Commerce</title>
+</head>
+<body>
+<h3>{{message}}</h3>
+<h2>Customer Registration</h2> SETUP REGISTRATION NOW
+<h3><a href={% url 'customer_login'%}>Login</a></h3>
+<br>
+    <form method="POST">
+        {% csrf_token %}
+        {{register_form}}
+        <br>
+        <button type="submit" class="btn btn-success float-right">Done</button>
+    </form>
+</body>
+</html>
+{% endblock%}

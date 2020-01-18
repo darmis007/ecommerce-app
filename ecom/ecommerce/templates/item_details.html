@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+
+{% block content%}
+<h4 align=right><a href={%url 'myprofile'%}>My Profile</a></h4>
+<h3 align = right><a href={% url 'home'%}>Home</a></h3>
+{% if request.user.email in customerusers%}
+<h4><a href={% url 'myCart' custom.id%}>My Cart</a></h4>
+{% endif%}
+
+
+<img src={{item.item_image}}>{% ifequal item.item_vendor_name.vendor_email request.user.email%}
+<a href={% url 'edit_item_image' item.id%}>Upload Image</a>{% endifequal%}</img><br>
+<h2>{{item.item_name}}</h2>
+<h3>Description:</h3><br>
+<h3>{{item.item_description}}</h3>
+<h3>Rs.{{item.item_cost}}</h3>
+ {% if request.user.email in customerusers %}
+ {% ifequal item.item_status "Available"%}
+ <form method="POST">
+        {% csrf_token %}
+        {{itemOrderForm}}
+        <button type="submit" class="btn btn-success float-right">Add To Cart</button>
+    </form>
+{% endifequal %}
+<h4>{{item.item_status}}</h4>
+        <h4><a href={% url 'wishlist' item.id%}>Add To Wishlist</a></h4>
+{% endif%}
+{% endblock%}

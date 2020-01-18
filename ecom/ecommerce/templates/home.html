@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+{% load socialaccount %}
+
+{% if user.is_authenticated %}
+<p>Welcome {{ user.username }} !!!</p>
+{% else %}
+<a href="{% provider_login_url 'github' %}">Github Sign Up</a>
+{% endif %}
+<h4 align=right><a href={%url 'myprofile'%}>My Profile</a></h4> 
+
+{% block content%}
+<h4 align=right><a href={%url 'myprofile'%}>My Profile</a></h4>
+<h3 align = right><a href={% url 'home'%}>Home</a></h3>
+{% if request.user.email in customerusers%}
+<h4 align=right><a href={% url 'myCart' custom.id%}>My Cart</a></h4>
+{% endif%}
+
+
+{% for item in items%}
+<a href={% url 'item_details' item.id%}>{{item.item_name}}</a><br>
+{% endfor%}
+
+{% endblock%}

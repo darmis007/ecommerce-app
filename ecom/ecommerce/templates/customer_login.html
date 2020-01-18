@@ -1,0 +1,26 @@
+{% load socialaccount %}
+
+<html>
+<head>
+<title>
+E-Commerce</title>
+</head>
+<body>
+<h2>E-Commerece</h2>
+<h2>Customer Login</h2>
+<h3 align=right><a href={% url 'clogin'%}>Back to Login</a></h3>
+<form method="POST">
+    {% csrf_token %}
+                
+    <label for="username">Email</label>
+    <input type="text" name="username" id="username" required>               
+    <label for="password">Password</label>                
+    <input type="password" name="password" id="password" required>
+    <p font color='red'>{{error}}</p>
+    <button type="submit">Login</button> <h3><a href={% url 'customer_register'%}>register</a></h3>
+    <a href="{% provider_login_url 'github' %}">Github Login</a>
+    <a class="btn btn-primary" href="{% url 'social:begin' 'google-oauth2' %}">
+        Google Login
+      </a>
+</body>
+</html>

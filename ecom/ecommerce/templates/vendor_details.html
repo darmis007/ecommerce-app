@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content%}
+<h4 align=right><a href={%url 'myprofile'%}>My Profile</a></h4>
+<h3 align = right><a href={% url 'home'%}>Home</a></h3>
+
+{% ifequal vendor.vendor_email request.user.email%}
+<img src='{{vendor.vendor_image.url }}'><a href={% url 'edit_vendor_image' vendor.id%}>Change Photo</a></img>
+<h3>Name: {{ vendor.vendor_name}}</h3>
+<h3>Address: {{vendor.vendor_address}}</h3>
+<h3>Contact: {{vendor.vendor_contact}}</h3>
+<h3>Email: {{vendor.vendor_email}}</h3>
+<img src={{vendor.vendor_image}}></img>
+<h2>My Items</h2>
+{% for item in items%}
+<h4>{{item.item_name}}  Rs.{{item.item_cost}}<a href={% url 'edit_item' item.id%}>Edit Cost</a>  My Quantity:{{item.item_quantity}}  <a href={% url 'edit_stock' item.id%}>add stock</a>  My Sales:{{item.item_sales}}  <a href={% url 'delete_item' item.id%}>delete</a></h4>
+{% endfor%}
+<h3><a href={% url 'add_item'%}> Add Item </a></h3>
+
+<h2>My Orders:</h2>
+{% for order in orders%}
+<h4> {{order.id}}  {{order.order_customer_name}}  {{order.order_date}}</h4>
+{% endfor%}
+<h4><a href={% url 'export_to_csv'%}>Download as Excel Sheet</a></h4>
+
+{% endifequal%}
+{% endblock%}

@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+
+{% block content%}
+<h3 align = right><a href={% url 'home'%}>Home</a></h3>
+<h4 align=right><a href={%url 'myprofile'%}>My Profile</a></h4> 
+{% if request.user.email in vendorusers%}
+<head>
+<title>E-Commerce</title>
+</head>
+<body>
+<h3>{{message}}</h3>
+<br>
+    <form method="POST">
+        {% csrf_token %}
+        {{itemForm}}
+        <br>
+        <button type="submit" class="btn btn-success float-right">Done</button>
+    </form>
+</body>
+</html>
+{% endif%}
+{% endblock%}

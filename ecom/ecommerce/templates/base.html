@@ -1,0 +1,11 @@
+{% load static%}
+<html>
+<head>
+<title>E-Commerce</title>
+</head>
+<body>
+{% block content%}
+{% endblock%}
+<h4>Logged in as {{request.user.email}}  <a href={% url 'logout'%}>Logout</a></h4>
+</body>
+</html>

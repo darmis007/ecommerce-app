@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content%}
+<h4 align=right><a href={%url 'myprofile'%}>My Profile</a></h4>
+<h3 align = right><a href={% url 'home'%}>Home</a></h3>
+{% if request.user.email in customerusers%}
+<h4 align=right><a href={% url 'myCart' custom.id%}>My Cart</a></h4>
+{% endif%}
+
+{% ifequal customer.customer_email request.user.email%}
+{% if customer.customer_image%}
+<img src={{customer.customer_image.url}} alt='Loading'/>{% endif%}<a href={% url 'edit_customer_image' customer.id%}>Change Photo</a>
+<h3>Name: {{ customer.customer_name}}</h3>
+<h3>Address: {{customer.customer_address}}</h3><h5><a href={% url 'edit_customer_profile' customer.id%}>Edit my Address</a>
+<h3>Contact: {{customer.customer_contact}}</h3>
+<h3>Email: {{customer.customer_email}}</h3>
+
+<h2>My Orders:</h2>
+{% for order in orders%}
+<h4> {{order.id}}  {{order.order_customer_name}}  {{order.order_date}}</h4>
+<h4>{{order.item_ordered.item_name}} {{order.order_quantity}}  {{order.item_ordered.item_cost}}  {{order.order_status}}</h4>
+{% endfor%}
+<h2>My Wishlist</h2>
+{% for item in customer.customer_wishlist.all %}
+<h4>{{item.item_name}} by {{item.item_vendor_name}} {% ifnotequal item.item_quantity 0%}Available</h4><a href={% url 'item_details' item.id%}>Order Now</a>{% endifnotequal%}</h4>
+{% endfor%}
+{% endifequal%}
+{% endblock%}

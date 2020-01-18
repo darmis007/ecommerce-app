@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+{% block content%}
+<h4 align=right><a href={%url 'myprofile'%}>My Profile</a></h4>
+<h3 align = right><a href={% url 'home'%}>Home</a></h3>
+{% if request.user.email in customerusers%}
+<h4><a href={% url 'myCart' custom.id%}>My Cart</a></h4>
+<h2>My Money: Rs.{{customer.customer_money}}   <a href={%url 'addMoney'%}>Add Money</a></h2>
+{% for order in orders.my_cart.all%}
+<h3>{{order.item_ordered.item_name}}  Rs.{{order.item_ordered.item_cost}}  {{order.order_quantity}} <a href={% url 'order_delete' order.id%}>Remove</a></h3>
+{% endfor%}
+<h3><a href={% url 'place_cart' orders.id%}>Place Order</a></h3>
+<h4>{{message}}</h4>
+{% endif%}
+{% endblock%}
